@@ -102,7 +102,7 @@ export const App = () => {
           >
             {selectedPost && (
               <div className="tile is-child box is-success ">
-                <PostDetails selestedPost={selectedPost} />
+                <PostDetails selectedPost={selectedPost} />
               </div>
             )}
           </div>

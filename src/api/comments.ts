@@ -15,6 +15,6 @@ export const createComment = ({
   return client.post<Comment>(`/comments`, { postId, name, email, body });
 };
 
-export const deleteComment = (commId: Comment['id']) => {
-  return client.delete(`/comments/${commId}`);
+export const deleteComment = (commentId: Comment['id']) => {
+  return client.delete(`/comments/${commentId}`);
 };

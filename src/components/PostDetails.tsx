@@ -6,10 +6,12 @@ import { NewCommentForm } from './NewCommentForm';
 import { Post } from '../types/Post';
 
 type Props = {
-  selestedPost: Post;
+  selectedPost: Post;
 };
 
-export const PostDetails: React.FC<Props> = ({ selestedPost }) => {
+export const PostDetails: React.FC<Props> = ({
+  selectedPost: selectedPost,
+}) => {
   const [comments, setComments] = useState<Comment[]>([]);
   const [isCommentsLoading, setIsCommentsLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
@@ -18,11 +20,11 @@ export const PostDetails: React.FC<Props> = ({ selestedPost }) => {
   useEffect(() => {
     setIsCommentsLoading(true);
     commentService
-      .getComments(selestedPost.id)
+      .getComments(selectedPost.id)
       .then(setComments)
       .catch(() => setHasError(true))
       .finally(() => setIsCommentsLoading(false));
-  }, [selestedPost]);
+  }, [selectedPost]);
 
   function deleteComment(commId: number) {
     setComments(currComments => currComments.filter(com => commId !== com.id));
@@ -39,10 +41,10 @@ export const PostDetails: React.FC<Props> = ({ selestedPost }) => {
       <div className="content" data-cy="PostDetails">
         <div className="block">
           <h2 data-cy="PostTitle">
-            #{selestedPost.id}: {selestedPost.title}
+            #{selectedPost.id}: {selectedPost.title}
           </h2>
 
-          <p data-cy="PostBody">{selestedPost.body}</p>
+          <p data-cy="PostBody">{selectedPost.body}</p>
         </div>
 
         <div className="block">
@@ -84,7 +86,7 @@ export const PostDetails: React.FC<Props> = ({ selestedPost }) => {
           <NewCommentForm
             setComments={setComments}
             setHasError={setHasError}
-            post={selestedPost}
+            post={selectedPost}
           />
         )}
       </div>
