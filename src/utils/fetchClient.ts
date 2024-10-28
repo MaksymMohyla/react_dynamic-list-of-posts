@@ -1,14 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const BASE_URL = 'https://mate.academy/students-api';
 
-// a promise resolved after a given delay
 function wait(delay: number) {
   return new Promise(resolve => {
     setTimeout(resolve, delay);
   });
 }
 
-// To have autocompletion and avoid mistypes
 type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 function request<T>(
@@ -26,7 +24,7 @@ function request<T>(
     };
   }
 
-  // for a demo purpose we emulate a delay to see if Loaders work
+  // should be 300
   return wait(300)
     .then(() => fetch(BASE_URL + url, options))
     .then(response => response.json());
