@@ -25,7 +25,10 @@ function request<T>(
 
   return wait(300)
     .then(() => fetch(BASE_URL + url, options))
-    .then(response => response.json());
+    .then(response => response.json())
+    .catch(err => {
+      throw err;
+    });
 }
 
 export const client = {

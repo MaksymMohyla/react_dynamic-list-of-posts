@@ -38,58 +38,56 @@ export const PostDetails: React.FC<Props> = ({
 
   return (
     <div className="content" data-cy="PostDetails">
-      <div className="content" data-cy="PostDetails">
-        <div className="block">
-          <h2 data-cy="PostTitle">
-            #{selectedPost.id}: {selectedPost.title}
-          </h2>
+      <div className="block">
+        <h2 data-cy="PostTitle">
+          #{selectedPost.id}: {selectedPost.title}
+        </h2>
 
-          <p data-cy="PostBody">{selectedPost.body}</p>
-        </div>
+        <p data-cy="PostBody">{selectedPost.body}</p>
+      </div>
 
-        <div className="block">
-          {isCommentsLoading ? (
-            <Loader />
-          ) : (
-            <>
-              {hasError && (
-                <div className="notification is-danger" data-cy="CommentsError">
-                  Something went wrong
-                </div>
-              )}
+      <div className="block">
+        {isCommentsLoading ? (
+          <Loader />
+        ) : (
+          <>
+            {hasError && (
+              <div className="notification is-danger" data-cy="CommentsError">
+                Something went wrong
+              </div>
+            )}
 
-              {!comments.length && !hasError && (
-                <p className="title is-4" data-cy="NoCommentsMessage">
-                  No comments yet
-                </p>
-              )}
+            {!comments.length && !hasError && (
+              <p className="title is-4" data-cy="NoCommentsMessage">
+                No comments yet
+              </p>
+            )}
 
-              {!!comments.length && !hasError && (
-                <CommentList comments={comments} onDelete={deleteComment} />
-              )}
-            </>
-          )}
+            {!!comments.length && !hasError && (
+              <CommentList comments={comments} onDelete={deleteComment} />
+            )}
+          </>
+        )}
 
-          {!isCommentFormShown && !hasError && !isCommentsLoading && (
-            <button
-              data-cy="WriteCommentButton"
-              type="button"
-              className="button is-link"
-              onClick={() => setIsCommentFormShown(true)}
-            >
-              Write a comment
-            </button>
-          )}
-        </div>
-
-        {isCommentFormShown && (
-          <NewCommentForm
-            setComments={setComments}
-            setHasError={setHasError}
-            post={selectedPost}
-          />
+        {!isCommentFormShown && !hasError && !isCommentsLoading && (
+          <button
+            data-cy="WriteCommentButton"
+            type="button"
+            className="button is-link"
+            onClick={() => setIsCommentFormShown(true)}
+          >
+            Write a comment
+          </button>
         )}
       </div>
+
+      {isCommentFormShown && (
+        <NewCommentForm
+          setComments={setComments}
+          setHasError={setHasError}
+          post={selectedPost}
+        />
+      )}
     </div>
   );
 };
